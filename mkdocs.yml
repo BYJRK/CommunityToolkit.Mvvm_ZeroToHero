@@ -1,4 +1,5 @@
 site_name: CommunityToolkit - 从入门到精通
+site_url: http://yunwuyue.xyz/CommunityToolkit.Mvvm_ZeroToHero/
 
 theme:
   name: material
@@ -20,6 +21,12 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
+
+markdown_extensions:
+  - footnotes
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
 
 plugins:
   - tags:
