@@ -10,6 +10,12 @@ theme:
   features:
     - navigation.indexes
     - search.suggest
+    - navigation.footer
+    - content.tooltips
+    - content.tabs.link
+    - content.code.annotate
+  icon:
+    annotation: material/arrow-right-circle
   palette:
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
@@ -27,9 +33,13 @@ theme:
 
 markdown_extensions:
   - footnotes
+  - attr_list
+  - md_in_html
   - admonition
   - pymdownx.details
   - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
 
 plugins:
   - tags:
