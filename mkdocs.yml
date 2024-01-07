@@ -9,6 +9,9 @@ theme:
   language: zh
   features:
     - navigation.indexes
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.sections
     - search.suggest
     - navigation.footer
     - content.tooltips
@@ -45,3 +48,31 @@ plugins:
   - tags:
       tags_file: tags.md
   - search
+
+nav:
+  - 首页: index.md
+  - MVVM Basics (WIP):
+    # - INotifyPropertyChanged
+    # - INotifyCollectionChanged
+    # - INotifyDataErrorInfo
+    # - ICommand
+    - Model vs. ViewModel: MVVM Basics/ModelVsViewModel.md
+  - ComponentModel:
+    - ObservableObect:
+      - ObservableObect: ComponentModel/ObservableObject/index.md
+      - OnPropertyChanged: ComponentModel/ObservableObject/OnPropertyChanged.md
+      - SetProperty: ComponentModel/ObservableObject/SetProperty.md
+    - ObservableRecipient (WIP):
+      - ObservableRecipient: ComponentModel/ObservableRecipient.md
+    - ObservableValidator (WIP):
+      - ObservableValidator: ComponentModel/ObservableValidator.md
+  - RelayCommand (WIP):
+    - RelayCommand: RelayCommand/RelayCommand.md
+    - AsyncRelayCommand: RelayCommand/AsyncRelayCommand.md
+  - Messengers (WIP):
+    - IMessenger: Messengers/IMessenger.md
+    - WeakReferenceMessenger: Messengers/WeakReferenceMessenger.md
+    - StrongReferenceMessenger: Messengers/StrongReferenceMessenger.md
+  - DependencyInjection (WIP):
+    - IHost: DependencyInjection/IHost.md
+    - IServiceProvider: DependencyInjection/IServiceProvider.md
