@@ -43,11 +43,17 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
 plugins:
   - tags:
       tags_file: tags.md
   - search
+
+extra:
+  generator: false
 
 nav:
   - 首页: index.md
@@ -56,7 +62,9 @@ nav:
     # - INotifyCollectionChanged
     # - INotifyDataErrorInfo
     # - ICommand
-    - Model vs. ViewModel: MVVM Basics/ModelVsViewModel.md
+    - MVVM: MVVM Basics/index.md
+    - ViewModel: MVVM Basics/ViewModel.md
+    - Model vs. ViewModel: MVVM Basics/Model vs. ViewModel.md
   - ComponentModel:
     - ObservableObect:
       - ObservableObect: ComponentModel/ObservableObject/index.md
@@ -69,6 +77,8 @@ nav:
   - RelayCommand (WIP):
     - RelayCommand: RelayCommand/RelayCommand.md
     - AsyncRelayCommand: RelayCommand/AsyncRelayCommand.md
+  - Source Generator (WIP):
+    - Source Generator: Source Generator/index.md
   - Messengers (WIP):
     - IMessenger: Messengers/IMessenger.md
     - WeakReferenceMessenger: Messengers/WeakReferenceMessenger.md
