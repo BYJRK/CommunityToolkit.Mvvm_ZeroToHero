@@ -16,6 +16,62 @@ Messenger 是一个消息传递机制，它可以让对象之间进行通信，�
 
 但是这些方法均存在一个问题：**模块之间存在耦合**。比如，如果我们想要将 B 替换成 C，那么就需要修改 A 的代码；更糟的是，如果我们想让 A 能够与更多的类通信，那么就需要在 A 中添加更多的属性、事件或方法。这样一来，A 和 B 之间的耦合就会越来越严重，代码也会变得越来越难以维护。
 
+下面我们就来看一看工具包为我们带来的 Messenger 该如何使用。
+
+## 基本用法
+
+Messenger 的使用方法基本上分三步走：
+
+1. 声明一个消息类型，或使用工具包内置的几种类型
+2. 注册消息（`IMessneger.Register`）
+3. 发送消息（`IMessenger.Send`）
+
+下面是一个简单的例子：
+
+```c#
+var receiver = new MessageReceiver();
+var sender = new MessageSender();
+
+sender.SendMessage();
+
+class MessageSender
+{
+    public void SendMessage()
+    {
+        // 发送消息
+        WeakReferenceMessenger.Default.Send(new MyMessage { Content = "Hello, world!" });
+    }
+}
+
+class MessageReceiver
+{
+    public MessageReceiver()
+    {
+        // 注册指定类型的消息
+        WeakReferenceMessenger.Default.Register<MyMessage>(this, OnMessageReceived);
+    }
+
+    void OnMessageReceived(object recipient, MyMessage message)
+    {
+        Console.WriteLine($"Message received from {recipient.GetType().Name}: {message.Content}");
+    }
+}
+
+// 一个自定义消息类型
+class MyMessage
+{
+    public string Content { get; init; } = "";
+}
+```
+
+运行即可看到效果：
+
+```
+Message received from MessageReceiver: Hello, world!
+```
+
+一些更复杂及灵活的用法详见后面的章节。
+
 ## Messenger 背后的原理
 
 Messenger 背后的原理可以想象成一个字典，它的键是消息的类型，值是一个委托列表。在注册时，我们会将类的对象和一个回调函数（委托）作为值添加到字典中；在发送消息时，我们会根据消息的类型从字典中取出对应的委托列表，然后依次调用这些委托。
