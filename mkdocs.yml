@@ -57,7 +57,9 @@ extra:
 
 nav:
   - 首页: index.md
-  - MVVM Basics (WIP):
+  - 快速开始:
+    - Quick Start/index.md
+  - MVVM 基础 (WIP):
     # - INotifyPropertyChanged
     # - INotifyCollectionChanged
     # - INotifyDataErrorInfo
@@ -65,7 +67,7 @@ nav:
     - MVVM: MVVM Basics/index.md
     - ViewModel: MVVM Basics/ViewModel.md
     - Model vs. ViewModel: MVVM Basics/Model vs. ViewModel.md
-  - ComponentModel:
+  - 组件模型（ComponentModel）:
     - ObservableObect:
       - ComponentModel/ObservableObject/index.md
       - OnPropertyChanged: ComponentModel/ObservableObject/OnPropertyChanged.md
@@ -74,17 +76,17 @@ nav:
       - ObservableRecipient: ComponentModel/ObservableRecipient.md
     - ObservableValidator (WIP):
       - ObservableValidator: ComponentModel/ObservableValidator.md
-  - RelayCommand (WIP):
+  - 中继指令（RelayCommand） (WIP):
     - RelayCommand: RelayCommand/RelayCommand.md
     - AsyncRelayCommand: RelayCommand/AsyncRelayCommand.md
-  - Source Generator (WIP):
+  - 源生成器（Source Generator） (WIP):
     - Source Generator: Source Generator/index.md
-  - Messengers (WIP):
+  - 消息中继（Messengers） (WIP):
     - Messengers/index.md
     - IMessenger: Messengers/IMessenger.md
     - WeakReferenceMessenger: Messengers/WeakReferenceMessenger.md
     - StrongReferenceMessenger: Messengers/StrongReferenceMessenger.md
     - Messages: Messengers/Messages/index.md
-  - DependencyInjection (WIP):
+  - 依赖注入（Dependency Injection） (WIP):
     - IHost: DependencyInjection/IHost.md
     - IServiceProvider: DependencyInjection/IServiceProvider.md

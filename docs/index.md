@@ -9,6 +9,10 @@ date: 2024-1-4 17:30:59
 !!! warning "警告"
     因为目前仍在施工中，大量内容仍未完成。目录中所有标记了“WIP（Working in progress）”的都是未完成的部分。
 
+你也可以观看我在 Bilibili 上发布的视频合集来快速学习这款工具包中的绝大多数实用功能。
+
+[:simple-bilibili: Bilibili](https://space.bilibili.com/600592/channel/collectiondetail?sid=2036983){ .md-button }
+
 ## 参考链接
 
 [:material-file-document: 官方文档](https://learn.microsoft.com/zh-cn/dotnet/communitytoolkit/mvvm/){ .md-button }
