@@ -55,9 +55,6 @@ plugins:
 extra:
   generator: false
 
-extra_css:
-  - stylesheets/extra.css
-
 nav:
   - 首页: index.md
   - 快速开始:
@@ -88,7 +85,6 @@ nav:
     - Messengers/index.md
     - IMessenger: Messengers/IMessenger.md
     - WeakReferenceMessenger: Messengers/WeakReferenceMessenger.md
-    - StrongReferenceMessenger: Messengers/StrongReferenceMessenger.md
     - Messages: Messengers/Messages/index.md
   - 依赖注入（Dependency Injection） (WIP):
     - IHost: DependencyInjection/IHost.md
