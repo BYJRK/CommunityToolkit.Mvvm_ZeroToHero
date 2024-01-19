@@ -81,11 +81,11 @@ nav:
     - AsyncRelayCommand: RelayCommand/AsyncRelayCommand.md
   - 源生成器（Source Generator） (WIP):
     - Source Generator: Source Generator/index.md
-  - 消息中继（Messengers） (WIP):
+  - 消息中继（Messengers）:
     - Messengers/index.md
     - IMessenger: Messengers/IMessenger.md
     - WeakReferenceMessenger: Messengers/WeakReferenceMessenger.md
-    - Messages: Messengers/Messages/index.md
+    - Messages (WIP): Messengers/Messages/index.md
   - 依赖注入（Dependency Injection） (WIP):
     - IHost: DependencyInjection/IHost.md
     - IServiceProvider: DependencyInjection/IServiceProvider.md
