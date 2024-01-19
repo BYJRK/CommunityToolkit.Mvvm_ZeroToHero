@@ -19,26 +19,34 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 class MyViewModel : ObservableObject
 {
-    private string _name;
-    public string Name
+    private string _firstName;
+    public string FirstName
     {
-        get => _name;
+        get => _firstName;
         set 
         {
-            if (_name == value)
+            if (_firstName == value)
                 return;
             
-            _name = value;
+            _firstName = value;
             OnPropertyChanged(); // (1)!
         }
     }
 
-    private int _age;
-    public int Age
+    private string _lastName;
+    public string LastName
     {
-        get => _age;
-        set => SetProperty(ref _age, value); // (2)!
+        get => _lastName;
+        set
+        {
+            if (SetProperty(ref _lastName, value)) // (2)!
+            {
+                OnPropertyChanged(nameof(FullName));
+            }
+        } 
     }
+
+    public string FullName => $"{FirstName} {LastName}";
 
     public RelayCommand SayHelloCommand { get; }
 
@@ -55,7 +63,7 @@ class MyViewModel : ObservableObject
 ```
 
 1. 这里因为 `OnPropertyChanged()` 方法中的参数使用了 `[CallerMemberName]` 特性，所以并不需要为方法传递属性名（通常写作 `nameof(Name)`）。
-2. `SetProperty()` 方法基本上相当于 `Name` 属性的 `setter` 中的代码，是一个更简便的写法。
+2. `SetProperty()` 方法基本上相当于 `Name` 属性的 `setter` 中的代码，是一个更简便的写法。它有一个 `bool` 类型的返回值，表示属性值是否发生了变化。
 
 ## （推荐👍）借助源生成器创建 ViewModel
 
@@ -67,10 +75,14 @@ using CommunityToolkit.Mvvm.ComponentModel;
 partial /* (1)! */ class MyViewModel : ObservableObject
 {
     [ObservableProperty]
-    private string _name; // (2)!
+    [NotifyPropertyChangedFor(nameof(FullName))] // (2)!
+    private string _firstName; // (3)!
     
     [ObservableProperty]
-    private int _age;
+    [NotifyPropertyChangedFor(nameof(FullName))]
+    private string _lastName;
+
+    public string FullName => $"{FirstName} {LastName}";
 
     [RelayCommand]
     private void SayHello()
@@ -81,7 +93,8 @@ partial /* (1)! */ class MyViewModel : ObservableObject
 ```
 
 1. 源生成器会在后台生成类中的其他代码，所以需要标记为 `partial`。
-2. 源生成器可以智能地识别各种常见的字段命名习惯，比如 `name`、`_name`、`m_name` 等等。
+2. 这个特性能够在 `setter` 中额外添加对于 `FullName` 属性的通知。
+3. 源生成器可以智能地识别各种常见的字段命名习惯，比如 `name`、`_name`、`m_name` 等等。
 
 简单来说，标记了 `[ObservableProperty]` 的字段，在后台会自动生成一个首字母大写的属性，并实现相应的 `getter` 及 `setter` 方法；标记了 `[RelayCommand]` 的方法，在后台会自动生成一个名称为 `<MethodName>Command` 的 `RelayCommand` 类型的属性。
 
@@ -103,8 +116,9 @@ partial /* (1)! */ class MyViewModel : ObservableObject
         <viewmodels:MyViewModel/>
     </Window.DataContext>
     <StackPanel>
-        <TextBox Text="{Binding Name}"/>
-        <TextBox Text="{Binding Age}"/>
+        <TextBox Text="{Binding FirstName}"/>
+        <TextBox Text="{Binding LastName}"/>
+        <TextBlock Text="{Binding FullName}"/>
         <Button Command="{Binding SayHelloCommand}"/>
     </StackPanel>
 </Window>
