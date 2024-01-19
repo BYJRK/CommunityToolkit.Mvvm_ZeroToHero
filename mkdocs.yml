@@ -55,6 +55,9 @@ plugins:
 extra:
   generator: false
 
+extra_css:
+  - stylesheets/extra.css
+
 nav:
   - 首页: index.md
   - 快速开始:
