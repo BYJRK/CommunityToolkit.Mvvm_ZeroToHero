@@ -88,7 +88,7 @@ nav:
     - Messengers/index.md
     - IMessenger: Messengers/IMessenger.md
     - WeakReferenceMessenger: Messengers/WeakReferenceMessenger.md
-    - Messages (WIP): Messengers/Messages/index.md
+    - Messages: Messengers/Messages.md
+    - Token: Messengers/Token.md
   - 依赖注入（Dependency Injection） (WIP):
-    - IHost: DependencyInjection/IHost.md
-    - IServiceProvider: DependencyInjection/IServiceProvider.md
+    - Dependency Injection: DependencyInjection/index.md
