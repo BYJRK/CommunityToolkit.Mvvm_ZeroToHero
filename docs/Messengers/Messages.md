@@ -1,10 +1,32 @@
 # 消息类型 Messages
 
-工具包中的 `IMessenger` 在 `Send` 或 `Register` 时并没有要求消息的种类满足任何条件（比如继承自某个基类），所以完全可以自由地实现任何消息类型。但是，工具包仍然为我们提供了几个常用的消息类型，包括：
+工具包为我们提供了几个常用的消息类型，包括：
 
 - `ValueChangedMessage`
 - `PropertyChangedMessage`
 - `RequestMessage`
+
+这几种消息类型有的拥有一些特殊的功能，下面将会详细介绍。如果我们希望对消息类型进行定制或扩展，那么可以继承这些消息类型，并实现自己的消息类型。
+
+## 自定义 Message
+
+工具包中的 `IMessenger` 接口约定的 `Send`、`Register` 等泛型方法，并没有要求消息的种类满足任何条件（比如继承自某个基类），所以完全可以自由地实现任何消息类型。
+
+比如这里，我们用 C# 9.0 为我们带来的 `record` 类型快速声明一个消息类型，并使用：
+
+```csharp
+// 声明一个消息类型
+public record MyMessage(string Content);
+
+// 发送消息
+WeakReferenceMessenger.Default.Send(new MyMessage("Hello World!"));
+
+// 接收消息
+WeakReferenceMessenger.Default.Register<MyMessage>(this, message =>
+{
+    Console.WriteLine(message.Content);
+});
+```
 
 ## ValueChangedMessage
 
@@ -78,10 +100,10 @@ Nice to meet you, too!
 ```
 
 !!! warning "没有回复者？"
-    由于在发送 `RequestMessage` 时，消息的接收者需要等待回复消息，所以如果此时没有接受者，那么可能会出现问题。具体来说，单纯调用 `Send` 不会报错，但是如果试图访问 `response.Response`，则会抛出异常。原因是并没有任何接收者提供了回复。
+    由于在发送 `RequestMessage` 时，消息的接收者需要等待回复消息，所以如果此时没有接受者，那么可能会出现问题。具体来说，单纯调用 `Send` 不会报错，但是如果试图访问 `response.Response`，**则会抛出异常**。原因是并没有任何接收者提供了回复。
 
 !!! warning "有多个回复者？"
-    如果有多个接收者回复了消息，那么将会报错。此时正确的做法是，可以从 `RequestMessage` 上的 `HasReceivedResponse` 属性判断是否已经有接收者回复了消息。如果已经有接收者回复了消息，那么这个属性的值将会为 `true`。
+    **如果有多个接收者回复了消息，那么将会报错**。此时正确的做法是，可以从 `RequestMessage` 上的 `HasReceivedResponse` 属性判断是否已经有接收者回复了消息。如果已经有接收者回复了消息，那么这个属性的值将会为 `true`。
 
 ## PropertyChangedMessage
 
