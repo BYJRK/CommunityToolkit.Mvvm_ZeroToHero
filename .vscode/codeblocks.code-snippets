@@ -1,0 +1,14 @@
+{
+	"Codeblocks": {
+		"scope": "markdown",
+		"prefix": "tabs",
+		"body": [
+			"=== \"${1:Program.cs}\"",
+			"\t",
+			"\t```csharp",
+			"\t$0",
+			"\t```",
+		],
+		"description": "Tabs of several codeblocks"
+	}
+}
