@@ -49,6 +49,11 @@ public partial class MyViewModel : ObservableObject
         }
     }
 
+    partial void OnNameChanging(string value);
+    partial void OnNameChanging(string? oldValue, string newValue);
+    partial void OnNameChanged(string value);
+    partial void OnNameChanged(string? oldValue, string newValue);
+
     /// <summary>The backing field for <see cref="FooCommand"/>.</summary>
     private RelayCommand? fooCommand;
     public IRelayCommand FooCommand => fooCommand ??= new RelayCommand(new Action(Foo));
