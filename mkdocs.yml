@@ -75,8 +75,7 @@ nav:
       - ComponentModel/ObservableObject/index.md
       - OnPropertyChanged: ComponentModel/ObservableObject/OnPropertyChanged.md
       - SetProperty: ComponentModel/ObservableObject/SetProperty.md
-    - ObservableRecipient (WIP):
-      - ObservableRecipient: ComponentModel/ObservableRecipient.md
+    - ObservableRecipient: ComponentModel/ObservableRecipient.md
     - ObservableValidator (WIP):
       - ObservableValidator: ComponentModel/ObservableValidator.md
   - 中继指令（RelayCommand） (WIP):
@@ -90,5 +89,6 @@ nav:
     - WeakReferenceMessenger: Messengers/WeakReferenceMessenger.md
     - Messages: Messengers/Messages.md
     - Token: Messengers/Token.md
+    - IRecipient: Messengers/IRecipient.md
   - 依赖注入（Dependency Injection） (WIP):
     - Dependency Injection: DependencyInjection/index.md
