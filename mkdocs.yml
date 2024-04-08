@@ -76,8 +76,7 @@ nav:
       - OnPropertyChanged: ComponentModel/ObservableObject/OnPropertyChanged.md
       - SetProperty: ComponentModel/ObservableObject/SetProperty.md
     - ObservableRecipient: ComponentModel/ObservableRecipient.md
-    - ObservableValidator (WIP):
-      - ObservableValidator: ComponentModel/ObservableValidator.md
+    - ObservableValidator: ComponentModel/ObservableValidator.md
   - 中继指令（RelayCommand） (WIP):
     - RelayCommand: RelayCommand/RelayCommand.md
     - AsyncRelayCommand: RelayCommand/AsyncRelayCommand.md
