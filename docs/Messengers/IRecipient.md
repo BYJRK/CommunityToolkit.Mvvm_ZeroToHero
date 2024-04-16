@@ -1,3 +1,7 @@
+---
+comments: true
+---
+
 # `IRecipient<>` 接口
 
 `IRecipient<>` 接口是一个泛型接口，它的泛型参数是一个 `TMessage` 类型的消息。这个接口定义了一个 `Receive` 方法，用于接收消息。我们可以通过实现这个接口来接收消息，形如：

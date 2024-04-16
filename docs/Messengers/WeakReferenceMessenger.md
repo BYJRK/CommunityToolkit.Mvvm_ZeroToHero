@@ -1,3 +1,7 @@
+---
+comments: true
+---
+
 # WeakReferenceMessenger & StrongReferenceMessenger
 
 ## 什么是 WeakReference？

@@ -1,3 +1,7 @@
+---
+comments: true
+---
+
 # SetProperty
 
 `SetProperty` 方法用于设置属性值，并在属性值发生变化时触发 `PropertyChanged` 事件。该方法的底层其实就是在调用 `OnPropertyChanged`。这里是一个最简单的 `SetProperty` 方法的实现：

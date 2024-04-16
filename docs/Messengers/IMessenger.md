@@ -1,4 +1,8 @@
-# IMessenger 接口
+---
+comments: true
+---
+
+# `IMessenger` 接口
 
 `IMessenger` 是工具包中的一个接口，规定了 Messenger 需要实现的一些方法，比如：
 
@@ -7,7 +11,7 @@
 - `UnregisterAll`：取消所有注册
 - `Send`：发送消息
 
-## 两个实现了这一接口的类
+## 实现了这一接口的类
 
 工具包中提供了两个实现了 `IMessenger` 接口的类：
 

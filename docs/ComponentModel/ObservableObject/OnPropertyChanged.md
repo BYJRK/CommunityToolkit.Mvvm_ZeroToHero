@@ -1,3 +1,7 @@
+---
+comments: true
+---
+
 # OnPropertyChanged
 
 `OnPropertyChanged` 方法用于触发 `PropertyChanged` 事件。它有两个方法重载：

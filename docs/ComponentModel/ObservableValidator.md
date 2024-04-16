@@ -1,10 +1,15 @@
+---
+comments: true
+---
+
 # ObservableValidator
 
 `ObservableValidator`（以下简称为 `OV`）差不多可以说是工具包的最后一块拼图。它与 [ObservableRecipient](ObservableRecipient.md) 类似，都是 `ObservableObject` 的子类。顾名思义，`OV` 的作用旨在提供对于数据的验证。它提供了如下几个属性或方法：
 
 - `HasErrors`：一个布尔值，表示当前的 VM 中是否有错误
-- `ValidateAllProperties`：一个方法，用于验证当前 VM 中的所有属性
 - `GetErrors`：一个方法，用于获取当前 VM 中的所有错误信息
+- `ValidateProperty`：一个方法，用于验证当前 VM 中的某个属性
+- `ValidateAllProperties`：一个方法，用于验证当前 VM 中的所有属性
 
 除此之外，`OV` 还支持 DOTNET 标准库中的许多用于数据验证的特性，比如：
 
@@ -68,6 +73,9 @@ partial class RegisterFormViewModel : ObservableValidator
 !!! note
     实际运行之后不难发现，对于数据的验证，只发生在调用 `ValidateAllProperties` 方法之后。这意味着，如果用户在输入框中输入了错误的数据，但是没有点击提交按钮，那么这些错误信息是不会被显示的；一旦点击了提交按钮，此时不仅会进行数据验证，还会在界面上也进行提示（比如文本框的边框会变红）。
 
+!!! note
+    如果想要实现实时验证，可以在 `setter` 中调用 `ValidateProperty` 方法，或者也可以为字段添加 `NotifyDataErrorInfo` 特性。后者是基于源生成器的，详见 [与字段相关的源生成器特性](../Source%20Generator/FieldAttributes.md#_6)。
+
 ## 自定义验证
 
 如果 DOTNET 原生的用于数据验证的特性无法满足需求，也就是需要自定义一些更加复杂的验证方式，那么有两种方法：
@@ -115,7 +123,7 @@ public class RegistrationForm : ObservableValidator
 
 ### 实现一个继承了 `ValidationAttribute` 的类
 
-[`ValidationAttribute`](https://source.dot.net/#System.ComponentModel.Annotations/System/ComponentModel/DataAnnotations/ValidationAttribute.cs,bf57007a2f61c388) 是一个 DOTNET 原生的抽象类。上面提到的一些常用的特性，比如 `Required`、`MinLength` 等，都是继承了这个类。实现一个继承了这个类的子类，就可以更加灵活地进行数据验证，因为可以通过构造函数传参来进行相关的配置。比如：
+[`ValidationAttribute`](https://source.dot.net/#System.ComponentModel.Annotations/System/ComponentModel/DataAnnotations/ValidationAttribute.cs,bf57007a2f61c388) 是一个 .NET 原生的抽象类。上面提到的一些常用的特性，比如 `Required`、`MinLength` 等，都是继承了这个类。实现一个继承了这个类的子类，就可以更加灵活地进行数据验证，因为可以通过构造函数传参来进行相关的配置。比如：
 
 ```csharp
 public sealed class GreaterThanAttribute : ValidationAttribute

@@ -1,4 +1,8 @@
-# Messengers
+---
+comments: true
+---
+
+# 信使 Messengers
 
 Messenger 是一个消息传递机制，它可以让对象之间进行通信，而不需要它们之间有直接的引用关系。从设计模式的角度来说，Messenger 其实是中介者模式的一种实现。
 

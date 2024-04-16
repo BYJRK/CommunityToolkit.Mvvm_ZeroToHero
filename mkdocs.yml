@@ -6,6 +6,7 @@ repo_url: https://github.com/BYJRK/CommunityToolkit.Mvvm_ZeroToHero
 
 theme:
   name: material
+  custom_dir: overrides
   language: zh
   features:
     - navigation.indexes
@@ -63,10 +64,6 @@ nav:
   - 快速开始:
     - Quick Start/index.md
   - MVVM 基础 (WIP):
-    # - INotifyPropertyChanged
-    # - INotifyCollectionChanged
-    # - INotifyDataErrorInfo
-    # - ICommand
     - MVVM: MVVM Basics/index.md
     - ViewModel: MVVM Basics/ViewModel.md
     - Model vs. ViewModel: MVVM Basics/Model vs. ViewModel.md
@@ -77,11 +74,16 @@ nav:
       - SetProperty: ComponentModel/ObservableObject/SetProperty.md
     - ObservableRecipient: ComponentModel/ObservableRecipient.md
     - ObservableValidator: ComponentModel/ObservableValidator.md
-  - 中继指令（RelayCommand） (WIP):
+  - 中继指令（RelayCommand）:
+    - RelayCommand/index.md
     - RelayCommand: RelayCommand/RelayCommand.md
     - AsyncRelayCommand: RelayCommand/AsyncRelayCommand.md
-  - 源生成器（Source Generator） (WIP):
+  - 源生成器（Source Generator）:
     - Source Generator: Source Generator/index.md
+    - 适用于字段（Field）的特性: Source Generator/FieldAttributes.md
+    - 适用于方法（Method）的特性: Source Generator/MethodAttributes.md
+    - 适用于类（Class）的特性: Source Generator/ClassAttributes.md
+    - 在 .NET Framework 中使用 Source Generator: Source Generator/SourceGeneratorNetFx.md
   - 消息中继（Messengers）:
     - Messengers/index.md
     - IMessenger: Messengers/IMessenger.md
@@ -90,4 +92,6 @@ nav:
     - Token: Messengers/Token.md
     - IRecipient: Messengers/IRecipient.md
   - 依赖注入（Dependency Injection） (WIP):
-    - Dependency Injection: DependencyInjection/index.md
+    - DependencyInjection/index.md
+    # - 使用 DependencyInjection
+    # - 使用 Hosting

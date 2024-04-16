@@ -1,3 +1,7 @@
+---
+comments: true
+---
+
 # MVVM（Model-View-ViewModel）
 
 下面是一张经典的 MVVM 模式的示意图（[出处](https://dzone.com/articles/a-beginners-guide-to-implementing-mvvm-architectur)）：

@@ -1,3 +1,7 @@
+---
+comments: true
+---
+
 # ObservableRecipient
 
 !!! tip 提示
@@ -114,29 +118,20 @@ protected override void Broadcast<T>(T oldValue, T newValue, string? propertyNam
 }
 ```
 
-!!! note
-    比较遗憾的是，我们无法通过为字段添加 `[ObservableProperty]` 的方式来轻松地实现广播功能。我们只能通过写完整属性，并在 `setter` 中使用相应的 `SetProperty` 方法，并传入 `broadcast` 参数来实现这一功能。形如：
+如果想要在属性值发生变化时广播，除了可以调用特殊的 `SetProperty` 方法外，还可以使用源生成器，为字段额外添加一个 `NotifyPropertyChangedRecipients` 特性。
 
-    ```csharp
-    private string _name;
+```csharp
+private string _name;
 
-    public string Name
-    {
-        get => _name;
-        set => SetProperty(ref _name, value, true);
-    }
+public string Name
+{
+    get => _name;
+    set => SetProperty(ref _name, value, true);
+}
 
-    private int _age;
+[ObservableProperty]
+[NotifyPropertyChangedRecipients]
+private int _age;
+```
 
-    public int Age
-    {
-        get => _age;
-        set 
-        {
-            if (SetProperty(ref _age, value, true))
-            {
-                // 属性值发生变化时，执行一些额外的操作
-            }
-        }
-    }
-    ```
+这一部分详见 [与字段相关的源生成器特性](../Source%20Generator/FieldAttributes.md#_5)。

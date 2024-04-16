@@ -1,8 +1,25 @@
+---
+comments: true
+---
+
 # 源生成器（Source Generator）
 
 [:material-file-document: 官方文档](https://learn.microsoft.com/zh-cn/dotnet/communitytoolkit/mvvm/generators/overview){.md-button }
 
+工具包为我们带来的，远不仅仅是一些基类（如 `ObservableObject`、`RelayCommand` 等），以及一个信使（`Messenger`）。因为这样的话，我们仍然需要写非常多的样板代码（boilerplate）。
+
 为了让我们在书写 ViewModel 时能够更加便捷高效，工具包为我们提供了一个非常强大的功能：源生成器。借助这一功能，我们可以非常轻易地写出功能完整的属性（Property）及中继指令（RelayCommand）。
+
+!!! note
+    源生成器是 .NET 5 引入的新特性。在之前，相信很多开发者使用过 `PropertyChanged.Fody` 这样的库来实现属性通知。但是它与源生成器不同，因为前者是在编译后通过 IL 操作来实现的，而后者是在编译时通过生成代码来实现的。这意味着源生成器的性能会更好，而且在编译时就能直接看到生成的代码。
+
+!!! warning
+    源生成器对项目有一定的要求：
+
+    1. 项目文件（.csproj）必须是 SDK 风格的项目文件
+    2. .NET 版本必须是 .NET 5.0+，或 .NET Standard 2.1+
+
+    这意味着，如果你在使用 .NET Framework，那么将几乎没有什么办法使用源生成器。如果你想在 .NET Framework 中使用源生成器，可以参考 [在 .NET Framework 4.x 项目中使用源生成器](SourceGeneratorNetFx.md)。
 
 下面是一个简单的示例：
 

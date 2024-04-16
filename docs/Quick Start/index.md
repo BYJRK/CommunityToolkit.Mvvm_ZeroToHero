@@ -1,3 +1,7 @@
+---
+comments: true
+---
+
 # 快速开始
 
 ## 安装 CommunityToolkit.Mvvm

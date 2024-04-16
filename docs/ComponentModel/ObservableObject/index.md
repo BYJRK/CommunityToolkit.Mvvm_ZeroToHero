@@ -1,3 +1,7 @@
+---
+comments: true
+---
+
 # ObservableObject
 
 [`ObservableObject`](https://github.com/CommunityToolkit/dotnet/blob/main/src/CommunityToolkit.Mvvm/ComponentModel/ObservableObject.cs "ObservableObject 源代码") 是工具包为我们提供的一个实现了 [`INotifyPropertyChanged`](https://source.dot.net/#System.ObjectModel/System/ComponentModel/INotifyPropertyChanged.cs,fd4b42d7e29d53e5 "INotifyPropertyChanged 源代码") 接口的基类[^1]。
