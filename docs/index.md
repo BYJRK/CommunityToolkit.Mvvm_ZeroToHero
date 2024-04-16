@@ -13,6 +13,12 @@ comments: true
 
 [:simple-bilibili: Bilibili](https://space.bilibili.com/600592/channel/collectiondetail?sid=2036983){ .md-button }
 
+## 关于作者
+
+B 站主页：[@十月的寒流](https://space.bilibili.com/600592)
+
+博客：[寒流の编程笔记](https://blog.coldwind.top)
+
 ## 参考链接
 
 [:material-file-document: 官方文档](https://learn.microsoft.com/zh-cn/dotnet/communitytoolkit/mvvm/){ .md-button }
