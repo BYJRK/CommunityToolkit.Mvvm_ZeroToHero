@@ -101,7 +101,7 @@ public partial class MainViewModel : ObservableObject
 如果希望在一个 `ObservableRecipient` 对象中广播广播属性值的变化（即调用 `Broadcast` 方法），可以为字段添加 `NotifyPropertyChangedRecipients` 特性：
 
 ```csharp
-public partial class MainViewModel : ObservableObject
+public partial class MainViewModel : ObservableRecipient
 {
     [ObservableProperty]
     [NotifyPropertyChangedRecipients]
