@@ -8,15 +8,15 @@ comments: true
 
 - `ObservableObject`
 - `ObservableRecipient`
-- `ObservableValidator`
 - `INotifyPropertyChanged`
 
-是的，它们看起来与工具包的几个基类，以及 INPC 接口完全同名（除了它们实际的名称是以 `Attribute` 结尾的）。它们的作用也非常直白，就是让当前类实现 INPC 接口，并为当前类添加这些类的功能，比如：
+它们看起来与工具包的几个基类，以及 INPC 接口完全同名（除了它们实际的名称是以 `Attribute` 结尾的）。它们的作用也非常直白，就是让当前类实现 INPC 接口，并为当前类添加这些类的功能，比如：
 
 - `ObservableObject` 会使当前类拥有 `OnPropertyChanged`、`SetProperty` 等方法
 - `ObservableRecipient` 会使当前类拥有 `Broadcast` 等方法
-- `ObservableValidator` 会使当前类拥有 `ValidateProperty`、`HasErrors` 等方法
 - `INotifyPropertyChanged` 会使当前类添加最基本的 `OnPropertyChanged` 方法
+
+（目前工具包并未提供 `ObservableValidator` 特性）
 
 这些特性的作用是为一个不便于改写的类（如数据模型类）添加功能，而不需要改写这个类。
 
