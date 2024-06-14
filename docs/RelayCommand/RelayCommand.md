@@ -54,6 +54,7 @@ public class ViewModel : ObservableObject
 public partial class ViewModel : ObservableObject
 {
     [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(SubmitCommand))]
     private string name;
 
     private bool CanSubmit() => !string.IsNullOrEmpty(name);
