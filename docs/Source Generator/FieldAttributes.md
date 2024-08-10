@@ -77,7 +77,7 @@ public partial class MainViewModel : ObservableObject
 
 ## 通知中继指令更新其可用状态
 
-如果某个中级指令（RelayCommand）的 `CanExecute` 与属性有关，并且希望属性的值发生变化后能够通知中继指令更新状态，那么可以使用 `NotifyCanExecuteChangedFor` 特性：
+如果某个中继指令（RelayCommand）的 `CanExecute` 与属性有关，并且希望属性的值发生变化后能够通知中继指令更新状态，那么可以使用 `NotifyCanExecuteChangedFor` 特性：
 
 ```csharp
 public partial class MainViewModel : ObservableObject
