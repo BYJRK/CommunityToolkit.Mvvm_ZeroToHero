@@ -98,7 +98,7 @@ public partial class MainViewModel : ObservableObject
 
 ## 广播属性值的变化
 
-如果希望在一个 `ObservableRecipient` 对象中广播广播属性值的变化（即调用 `Broadcast` 方法），可以为字段添加 `NotifyPropertyChangedRecipients` 特性：
+如果希望在一个 `ObservableRecipient` 对象中广播属性值的变化（即调用 `Broadcast` 方法），可以为字段添加 `NotifyPropertyChangedRecipients` 特性：
 
 ```csharp
 public partial class MainViewModel : ObservableRecipient
@@ -156,7 +156,7 @@ public partial class MainViewModel : ObservableObject
 
 ## 希望在属性值发生变化后执行额外的逻辑
 
-如果希望在属性值发生变化后执行额外的逻辑，还可以借助分部方法来实现。从 [基本用法](#基本用法) 的中给出的后台生成的完整代码中可以发现，`setter` 中存在一些分部方法，名称为 `On<PropertyName>Changed。借助这些分部方法，我们就可以实现这个需求。形如：
+如果希望在属性值发生变化后执行额外的逻辑，还可以借助分部方法来实现。从 [基本用法](#基本用法) 的中给出的后台生成的完整代码中可以发现，`setter` 中存在一些分部方法，名称为 `On<PropertyName>Changed`。借助这些分部方法，我们就可以实现这个需求。形如：
 
 ```csharp
 public partial class MainViewModel : ObservableObject

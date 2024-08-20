@@ -23,4 +23,4 @@ B 站主页：[@十月的寒流](https://space.bilibili.com/600592)
 
 [:material-file-document: 官方文档](https://learn.microsoft.com/zh-cn/dotnet/communitytoolkit/mvvm/){ .md-button }
 [:simple-github: GitHub 源代码](https://github.com/CommunityToolkit/dotnet){ .md-button }
-[:simple-csharp: DOTNET 开源代码](https://source.dot.net/){ .md-button }
+[:material-language-csharp: DOTNET 开源代码](https://source.dot.net/){ .md-button }
