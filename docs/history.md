@@ -1,5 +1,9 @@
 # 近期更新
 
+## 2025-05-19
+
+完成 [MVVM Basics](./MVVM%20Basics/Model%20vs.%20ViewModel.md) 部分的内容。
+
 ## 2024-11-08
 
 在 [IMessenger](./Messengers/IMessenger.md) 中添加了对于一个实例对于同一种消息只能注册一次的警告。

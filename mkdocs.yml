@@ -64,9 +64,9 @@ nav:
   - 更新记录: history.md
   - 快速开始:
     - Quick Start/index.md
-  - MVVM 基础 (WIP):
+  - MVVM 基础:
     - MVVM: MVVM Basics/index.md
-    - ViewModel: MVVM Basics/ViewModel.md
+    - ViewModel (WIP): MVVM Basics/ViewModel.md
     - Model vs. ViewModel: MVVM Basics/Model vs. ViewModel.md
   - 组件模型（ComponentModel）:
     - ObservableObect:

@@ -42,7 +42,7 @@ public class ViewModel : ObservableObject
 
 1. 通常我们会将类型声明为 `IRelayCommand`，而不是 `RelayCommand`，从而让使用者只关注接口暴露的方法，而不关心其实现；并且通常我们会在 VM 的构造函数中初始化这些属性，所以只提供 `getter` 即可
 2. `RelayCommand` 的构造函数可以接受两个参数：`Execute` 和 `CanExecute`，分别表示执行和判断是否可执行的方法
-3. `RelayCommand` 的构造函数也支持只传入一个参数，表示执行的方法，且不提供 `CanExecute` 的逻辑。而且这里除了直接传入符合委托类型的方法，还可以使用一个 Lambda 表达式简单地进行实现。
+3. `RelayCommand` 的构造函数也支持只传入一个参数，表示执行的回调方法，且不提供 `CanExecute` 的逻辑。而且这里除了直接传入符合委托类型的方法，还可以使用一个 Lambda 表达式简单地进行实现。
 
 类似地，`RelayCommand<T>` 方法传入的是包含一个 `T` 类型入参的 `Execute` 与 `CanExecute` 方法。这里不再赘述。
 
