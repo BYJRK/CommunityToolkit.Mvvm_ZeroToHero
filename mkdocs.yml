@@ -61,6 +61,7 @@ extra_css:
 
 nav:
   - 首页: index.md
+  - 更新记录: history.md
   - 快速开始:
     - Quick Start/index.md
   - MVVM 基础 (WIP):

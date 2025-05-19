@@ -85,3 +85,59 @@ partial class MainViewModel
 
 !!! info
     借助源生成器为方法后台生成的代码同样可以在项目的 `依赖项|分析器|CommunityToolkit.Mvvm.SourceGenerators` 中看到。可以参考 [相关章节](../Source%20Generator/FieldAttributes.md#_1) 的介绍。
+
+## CanExecute 的实现
+
+关于一个 `RelayCommand` 的 `CanExecute` 相关的逻辑，一般有如下几种实现方式：
+
+1. 不使用 `RelayCommand` 的这一功能，而是额外写一个具有通知功能的 `bool` 类型的属性，并绑定到 `IsEnabled` 属性上
+2. 声明一个 `bool` 类型的属性，并在 `RelayCommand` 特性中添加 `CanExecute = nameof(PropertyName)`
+3. 声明一个返回值为 `bool` 的无参方法，然后用 `CanExecute = nameof(MethodName)` 来添加
+4. 声明一个参数与 `RelayCommand` 对应方法相同的返回 `bool` 的方法，然后用上述方式添加
+
+但实际上，为了最大化 `CanExecute` 与控件状态的同步，通常只使用上述方法是不够的。我们可能还需要主动调用 `RelayCommand` 的 `NotifyCanExecuteChanged` 方法，或为用于生成通知属性的字段添加 `NotifyCanExecuteChangedFor` 特性。
+
+下面这个例子展示了常见的几种实现方式：
+
+```csharp
+partial class ViewModel : ObservableObject
+{
+    // 方法一：绑定 IsEnabled 属性
+
+    [ObservableProperty]
+    private bool _isEnabled = true;  // 绑定到控件的 IsEnabled 属性
+
+    [RelayCommand]
+    private void Foo1() { }
+
+    // 方法二：绑定到属性
+
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(Foo2Command))]
+    private string? _userName;
+
+    private bool CanFoo2 => !string.IsNullOrEmpty(UserName);
+    // public bool CanFoo2 { get { return !string.IsNullOrEmpty(UserName); } }
+
+    [RelayCommand(CanExecute = nameof(CanFoo2))]
+    private void Foo2() { }
+
+    // 方法三：绑定到无参方法
+
+    private bool CanFoo3() => !string.IsNullOrEmpty(UserName);
+    // public bool CanFoo3() { return !string.IsNullOrEmpty(UserName); }
+
+    [RelayCommand(CanExecute = nameof(CanFoo3))]
+    private void Foo3() { }
+
+    // 方法四：绑定到有参方法
+
+    // 将 Button 的 Command 绑定到 Foo4Command，CommandParameter 绑定到 UserName
+    private bool CanFoo4(string? userName) => !string.IsNullOrEmpty(userName);
+
+    [RelayCommand(CanExecute = nameof(CanFoo4))]
+    private void Foo4(string? userName) { }
+}
+```
+
+在上面的第四种方法中，如果是通过 `CommandParameter` 绑定具有通知功能的属性（包括 VM 中的属性，以及其他控件的依赖属性，如 `TextBox.Text` 等），那么当该值发生改变时，按钮的可用状态也将得到更新；否则，按钮的可用状态将无法得到更新，但是在执行 `RelayCommand` 前，仍旧会调用 `CanExecute` 方法来判断是否可用。
