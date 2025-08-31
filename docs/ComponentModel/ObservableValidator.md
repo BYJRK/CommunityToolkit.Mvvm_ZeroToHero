@@ -221,3 +221,53 @@ string _username = string.Empty;
 CultureInfo.CurrentCulture = new CultureInfo("zh-CN");
 CultureInfo.CurrentUICulture = new CultureInfo("zh-CN");
 ```
+
+## 使用 Avalonia UI 时需要注意的地方
+
+Avalonia UI 对于校验功能有一套自己的 `BindingPlugins` 机制，并内置了一些 `DataValidator`，用来提供数据校验功能。具体来说，一个默认的项目会包含如下几个 `Plugin`：
+
+![Avalonia 自带的三个 BindingPlugin，其中第一个是 DataAnnotationsValidationPlugin](https://s2.loli.net/2025/08/31/CQlFR3c2io7HeMa.png)
+
+可以看到，第一个插件就是 `DataAnnotationsValidationPlugin`，它会自动扫描视图模型中的数据注解特性，并进行相应的校验。
+
+但不太妙的是，这与我们工具包的 `ObservableValidator` 的实现方式“不谋而合”，或者说重复了。因此，如果我们要在一个 Avalonia UI 项目中使用 `ObservableValidator`，就需要注意避免与内置的校验机制产生冲突。
+
+具体做法为，我们可以将 Avalonia 自带的这个与 `DataAnnotations` 相关的插件给移除。比如，我们可以在 `App.axaml.cs` 中这样做：
+
+```csharp
+public override void OnFrameworkInitializationCompleted()
+{
+    if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+    {
+        DisableAvaloniaDataAnnotationValidation();
+        desktop.MainWindow = new MainWindow
+        {
+            DataContext = new MainWindowViewModel(),
+        };
+    }
+
+    base.OnFrameworkInitializationCompleted();
+}
+
+private void DisableAvaloniaDataAnnotationValidation()
+{
+    var dataValidationPluginsToRemove =
+        BindingPlugins.DataValidators.OfType<DataAnnotationsValidationPlugin>().ToArray();
+    
+    foreach (var plugin in dataValidationPluginsToRemove)
+    {
+        BindingPlugins.DataValidators.Remove(plugin);
+    }
+}
+```
+
+!!! note
+    简单起见，我们还可以将上面的 `DisableAvaloniaDataAnnotationValidation` 简单写成 `BindingPlugins.DataValidators.RemoveAt(0)`，因为它总是在第一个。当然这看起来可能有些“魔法”，但至少目前来说，是可行且有效的。
+
+上面的方式其实也是使用 `Avalonia` 官方的模板搭配工具包实现 MVVM 时生成的默认代码。在安装了 Avalonia UI 相关的模板后，可以用下面的控制台指令进行创建：
+
+```shell
+dotnet new avalonia.mvvm -m CommunityToolkit
+```
+
+然后就可以在 `App.axaml.cs` 中看到上面的逻辑了。
