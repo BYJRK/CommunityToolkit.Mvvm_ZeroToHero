@@ -69,7 +69,7 @@ nav:
     - ViewModel (WIP): MVVM Basics/ViewModel.md
     - Model vs. ViewModel: MVVM Basics/Model vs. ViewModel.md
   - 组件模型（ComponentModel）:
-    - ObservableObect:
+    - ObservableObject:
       - ComponentModel/ObservableObject/index.md
       - OnPropertyChanged: ComponentModel/ObservableObject/OnPropertyChanged.md
       - SetProperty: ComponentModel/ObservableObject/SetProperty.md
