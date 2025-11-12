@@ -109,6 +109,52 @@ Nice to meet you, too!
 !!! warning "有多个回复者？"
     **如果有多个接收者回复了消息，那么将会报错**。此时正确的做法是，可以从 `RequestMessage` 上的 `HasReceivedResponse` 属性判断是否已经有接收者回复了消息。如果已经有接收者回复了消息，那么这个属性的值将会为 `true`。
 
+## AsyncRequestMessage
+
+`AsyncRequestMessage` 是 `RequestMessage` 的异步版本。但是它可能稍微有一点反常识。在使用它时，与其说是接收方在异步地处理消息并返回结果，不如说它直接将一个异步任务丢给了发送者，并让发送者自己在接到异步任务后开始等待任务的完成，并最终拿到结果。
+
+!!! info "为什么要这样设计？"
+    这样设计其实是有原因的：`IMessenger` 的 `Register` 方法中传入的回调是一个 `void` 类型的，也就是说如果我们想在接收者这边进行异步处理，我们只能给它传入一个 `async void` 的回调。这是很不理想的方式。
+
+我们看一个简单的例子：
+
+```csharp
+// 接收方
+public partial class MainWindow : Window
+{
+    public MainWindow()
+    {
+        InitializeComponent();
+
+        WeakReferenceMessenger.Default.Register<AsyncRequestMessage<string>>(this, (_, m) =>
+        {
+            // 这里我们回复消息时，其实异步任务只是刚刚开始，还没有完成
+            m.Reply(GetStringAsync());
+        });
+    }
+
+    // 模拟一个需要耗时一段时间才能得到结果的任务
+    private async Task<string> GetStringAsync()
+    {
+        await Task.Delay(2000);
+        return "hello, world!";
+    }
+}
+
+// 发送方
+partial class MainViewModel : ObservableObject
+{
+    [RelayCommand]
+    private async Task SendMessageAsync()
+    {
+        var request = WeakReferenceMessenger.Default.Send<AsyncRequestMessage<string>>();
+        var response = await request.Response; // 这里的 Response 属性是一个 Task<string>
+    }
+}
+```
+
+通过这样的方式，我们就可以实现异步地接收消息回复了。
+
 ## PropertyChangedMessage
 
 `PropertyChangedMessage` 是一个用于通知属性发生变化的消息类型，它包含一个 `PropertyName` 属性，用于存储属性的名称。如果希望发送一个用于通知某个属性发生变化的消息，可以使用 `PropertyChangedMessage`。
