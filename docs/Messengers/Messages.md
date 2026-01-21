@@ -155,6 +155,47 @@ partial class MainViewModel : ObservableObject
 
 通过这样的方式，我们就可以实现异步地接收消息回复了。
 
+## CollectionRequestMessage
+
+如果不满足于 `RequestMessage` 只能有一个接收者进行回复这一限制，而是希望多位接收者都能进行回复，并且回复的内容会被放在一个集合里面，那么 `CollectionRequestMessage<T>` 就派上用场了。这个消息类型实现了 `IEnumerable<T>` 接口，所以我们可以像使用集合一样使用它。此外，也可以访问它的 `Responses` 属性，来获取所有接收者的回复内容。
+
+下面有一个简单的例子，`MainViewModel` 发送一个 `CollectionRequestMessage<int>` 消息，并等待一系列 `SubViewModel` 的回复，从而计算当前活跃的子视图模型的数量：
+
+```csharp
+// 主视图模型负责发送消息并统计活跃的子视图模型数量
+class MainViewModel : ObservableObject
+{
+    public void CheckSubsStatus()
+    {
+        var response = WeakReferenceMessenger.Default.Send<CollectionRequestMessage<int>>(new());
+        Console.WriteLine($"Alive count: {response.Count()}");
+    }
+}
+
+// 子视图模型负责接收消息并回复自己的状态
+class SubViewModel : ObservableRecipient, IRecipient<CollectionRequestMessage<int>>
+{
+    public bool IsAlive { get; set; }
+
+    public void Receive(CollectionRequestMessage<int> message)
+    {
+        message.Reply(IsAlive ? 1 : 0);
+    }
+}
+// 
+var mainVM = new MainViewModel();
+var sub1 = new SubViewModel { IsActive = true };
+var sub2 = new SubViewModel { IsActive = true };
+var sub3 = new SubViewModel { IsActive = false };
+var sub4 = new SubViewModel { IsActive = true };
+var sub5 = new SubViewModel { IsActive = false };
+mainVM.CheckSubsStatus();
+```
+
+运行结果会得到当前活跃的子视图模型数量为 3。
+
+此外，`CollectionRequestMessage` 还提供了一个异步版本 `AsyncCollectionRequestMessage<T>`，用于异步地接收多个回复，并且提供了 `CancellationToken`，用于取消等待回复的操作。
+
 ## PropertyChangedMessage
 
 `PropertyChangedMessage` 是一个用于通知属性发生变化的消息类型，它包含一个 `PropertyName` 属性，用于存储属性的名称。如果希望发送一个用于通知某个属性发生变化的消息，可以使用 `PropertyChangedMessage`。

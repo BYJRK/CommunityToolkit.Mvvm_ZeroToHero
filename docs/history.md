@@ -1,5 +1,9 @@
 # 近期更新
 
+## 2026-01-21
+
+在 [Messages](./Messengers/Messages.md) 中添加了关于 `CollectionRequestMessage` 的使用说明。
+
 ## 2025-11-12
 
 在 [Messages](./Messengers/Messages.md) 中添加了关于 `AsyncRequestMessage` 的使用说明。
