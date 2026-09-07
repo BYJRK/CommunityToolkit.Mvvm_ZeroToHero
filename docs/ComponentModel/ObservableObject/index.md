@@ -22,9 +22,9 @@ comments: true
 
 `ObservableObject` 除了实现了 `INotifyPropertyChanged` 接口之外，还提供了一些方法来帮助我们实现通知功能。比如：
 
-- `OnPropertyChanged`（拥有两个方法重载）
-- `SetProperty`（包含六个方法重载）
-- `SetPropertyAndNotifyOnCompletion`（包含五个重载，用于 `TaskNotifier`）
+- [`OnPropertyChanged`](OnPropertyChanged.md)（拥有两个方法重载）
+- [`SetProperty`](SetProperty.md)（包含六个方法重载）
+- [`SetPropertyAndNotifyOnCompletion`](TaskNotifier.md)（包含五个重载，用于 `TaskNotifier`）
 
 !!! tip "实际使用"
     实际上，因为有源生成器（Source Generator），大多数情况下，我们并不需要手动去调用这些方法，甚至不需要书写属性。关于这部分内容，请参见 [源生成器](../../Source%20Generator/index.md)

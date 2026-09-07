@@ -73,6 +73,7 @@ nav:
       - ComponentModel/ObservableObject/index.md
       - OnPropertyChanged: ComponentModel/ObservableObject/OnPropertyChanged.md
       - SetProperty: ComponentModel/ObservableObject/SetProperty.md
+      - TaskNotifier: ComponentModel/ObservableObject/TaskNotifier.md
     - ObservableRecipient: ComponentModel/ObservableRecipient.md
     - ObservableValidator: ComponentModel/ObservableValidator.md
   - 中继指令（RelayCommand）:
