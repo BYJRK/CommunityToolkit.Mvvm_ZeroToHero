@@ -1,0 +1,4 @@
+/* the original admonition text is a bit too small */
+.md-typeset .admonition {
+    font-size: 90%;
+}

@@ -1,0 +1,2050 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://mvvm.coldwind.top/ComponentModel/ObservableObject/TaskNotifier/">
+      
+      
+        <link rel="prev" href="../SetProperty/">
+      
+      
+        <link rel="next" href="../../ObservableRecipient/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>TaskNotifier - CommunityToolkit - 从入门到精通</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+  
+  
+  
+  
+  <style>:root{--md-annotation-icon:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M22%2012a10%2010%200%200%201-10%2010A10%2010%200%200%201%202%2012%2010%2010%200%200%201%2012%202a10%2010%200%200%201%2010%2010M6%2013h8l-3.5%203.5%201.42%201.42L17.84%2012l-5.92-5.92L10.5%207.5%2014%2011H6z%22/%3E%3C/svg%3E');}</style>
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+<meta name="google-site-verification" content="TyHihrwbL0xKIQFvFxq5rMc7g8GHI4MEKuj5m3--N2w" />
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tasknotifier" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="CommunityToolkit - 从入门到精通" class="md-header__button md-logo" aria-label="CommunityToolkit - 从入门到精通" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            CommunityToolkit - 从入门到精通
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              TaskNotifier
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/BYJRK/CommunityToolkit.Mvvm_ZeroToHero" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    CommunityToolkit.Mvvm_ZeroToHero
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="CommunityToolkit - 从入门到精通" class="md-nav__button md-logo" aria-label="CommunityToolkit - 从入门到精通" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    CommunityToolkit - 从入门到精通
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/BYJRK/CommunityToolkit.Mvvm_ZeroToHero" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    CommunityToolkit.Mvvm_ZeroToHero
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../history/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    更新记录
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../Quick%20Start/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    快速开始
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    快速开始
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../MVVM%20Basics/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MVVM 基础
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MVVM 基础
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../MVVM%20Basics/ViewModel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ViewModel (WIP)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../MVVM%20Basics/Model%20vs.%20ViewModel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Model vs. ViewModel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    组件模型（ComponentModel）
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    组件模型（ComponentModel）
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ObservableObject
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ObservableObject
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../OnPropertyChanged/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OnPropertyChanged
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SetProperty/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SetProperty
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TaskNotifier
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TaskNotifier
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        工作机制
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基本用法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="基本用法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-taskt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 返回结果的异步任务 (Task&lt;T&gt;)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 无返回值的异步任务 (Task)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        任务完成回调
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XAML 界面绑定
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#asyncrelaycommand" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        与 AsyncRelayCommand 的对比与选型
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#avalonia-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        在 Avalonia UI 中的使用差异
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="在 Avalonia UI 中的使用差异">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#avalonia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Avalonia 推荐方案：^ 流绑定运算符
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ObservableRecipient/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ObservableRecipient
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ObservableValidator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ObservableValidator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../RelayCommand/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    中继指令（RelayCommand）
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    中继指令（RelayCommand）
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../RelayCommand/RelayCommand/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RelayCommand
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../RelayCommand/AsyncRelayCommand/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AsyncRelayCommand
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../Source%20Generator/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    源生成器（Source Generator）
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    源生成器（Source Generator）
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Source%20Generator/FieldAttributes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    适用于字段（Field）的特性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Source%20Generator/MethodAttributes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    适用于方法（Method）的特性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Source%20Generator/ClassAttributes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    适用于类（Class）的特性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Source%20Generator/SourceGeneratorNetFx/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    在 .NET Framework 中使用 Source Generator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../Messengers/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    消息中继（Messengers）
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    消息中继（Messengers）
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Messengers/IMessenger/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IMessenger
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Messengers/WeakReferenceMessenger/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WeakReferenceMessenger
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Messengers/Messages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Messages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Messengers/Token/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Token
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Messengers/IRecipient/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IRecipient
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../DependencyInjection/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    依赖注入（Dependency Injection） (WIP)
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    依赖注入（Dependency Injection） (WIP)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        工作机制
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基本用法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="基本用法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-taskt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 返回结果的异步任务 (Task&lt;T&gt;)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 无返回值的异步任务 (Task)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        任务完成回调
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XAML 界面绑定
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#asyncrelaycommand" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        与 AsyncRelayCommand 的对比与选型
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#avalonia-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        在 Avalonia UI 中的使用差异
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="在 Avalonia UI 中的使用差异">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#avalonia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Avalonia 推荐方案：^ 流绑定运算符
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="tasknotifier">TaskNotifier</h1>
+<p>在 MVVM 模式中，我们有时需要将一个异步操作作为属性暴露给 UI 绑定（例如显示加载状态、展示任务结果或捕获异常）。</p>
+<p>如果我们直接给视图模型添加一个 <code>Task</code> 类型的属性（也就是使用普通的 <code>SetProperty</code>），那么它只会在给属性赋予新对象时触发一次 <code>PropertyChanged</code> 事件。此时任务通常才刚刚启动，UI 绑定的还是初始/未完成状态；当任务真正执行完毕时，由于属性指向的 Task 对象引用并没有改变，也没有什么机制去触发通知，会导致 UI 无法自动更新为完成后的结果。</p>
+<p>为了解决这个问题，<code>ObservableObject</code> 提供了 <code>SetPropertyAndNotifyOnCompletion</code> 方法，并配合 <code>TaskNotifier</code> / <code>TaskNotifier&lt;T&gt;</code> 类型来管理异步属性的通知。</p>
+<h2 id="_1">工作机制</h2>
+<p><code>SetPropertyAndNotifyOnCompletion</code> 会在以下两个时机分别触发属性通知：</p>
+<ol>
+<li><strong>赋值时</strong>：当为属性赋予一个新的 <code>Task</code> 实例时，先触发一次 <code>PropertyChanged</code>，通知 UI 任务已经开始（此时 <code>Task.IsCompleted</code> 为 <code>false</code>）。</li>
+<li><strong>任务完成时</strong>：在后台监控该任务，当任务执行完毕（无论是成功、取消还是抛出异常）后，会自动<strong>再次触发</strong> <code>PropertyChanged</code> 事件，通知 UI 刷新绑定。</li>
+</ol>
+<p>为了能够追踪并管理任务状态，该方法要求后备字段使用特殊的包装类型 <code>TaskNotifier</code>（对应无返回值的 <code>Task</code>）或 <code>TaskNotifier&lt;T&gt;</code>（对应带返回值的 <code>Task&lt;T&gt;</code>）。</p>
+<div class="admonition note">
+<p class="admonition-title">隐式类型转换</p>
+<p><code>TaskNotifier</code> 和 <code>TaskNotifier&lt;T&gt;</code> 是 <code>ObservableObject</code> 的受保护（<code>protected</code>）内部类。它们内部定义了到 <code>Task</code> / <code>Task&lt;T&gt;</code> 的<strong>隐式转换运算符</strong>（<code>implicit operator</code>），因此在属性的 <code>getter</code> 中可以直接作为普通的 <code>Task</code> 返回，无需手动解包。</p>
+</div>
+<h2 id="_2">基本用法</h2>
+<h3 id="1-taskt">1. 返回结果的异步任务 (<code>Task&lt;T&gt;</code>)</h3>
+<p>当异步操作有返回值时，后备字段声明为 <code>TaskNotifier&lt;T&gt;</code>，公开属性声明为 <code>Task&lt;T&gt;</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyViewModel</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ObservableObject</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// 1. 后备字段使用 TaskNotifier&lt;T&gt;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">TaskNotifier</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;?</span><span class="w"> </span><span class="n">_loadDataTask</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 2. 属性类型依然是 Task&lt;T&gt;，在 setter 中调用 SetPropertyAndNotifyOnCompletion</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;?</span><span class="w"> </span><span class="n">LoadDataTask</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">get</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">_loadDataTask</span><span class="p">;</span>
+<span class="w">        </span><span class="k">set</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">SetPropertyAndNotifyOnCompletion</span><span class="p">(</span><span class="k">ref</span><span class="w"> </span><span class="n">_loadDataTask</span><span class="p">,</span><span class="w"> </span><span class="k">value</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">LoadData</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 3. 直接将 Task&lt;T&gt; 赋值给属性即可</span>
+<span class="w">        </span><span class="n">LoadDataTask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FetchDataAsync</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">FetchDataAsync</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="n">Task</span><span class="p">.</span><span class="n">Delay</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">"数据加载成功！"</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="2-task">2. 无返回值的异步任务 (<code>Task</code>)</h3>
+<p>当异步操作没有返回值时，使用非泛型的 <code>TaskNotifier</code> 与 <code>Task</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyViewModel</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ObservableObject</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">TaskNotifier</span><span class="o">?</span><span class="w"> </span><span class="n">_saveTask</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Task</span><span class="o">?</span><span class="w"> </span><span class="n">SaveTask</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">get</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">_saveTask</span><span class="p">;</span>
+<span class="w">        </span><span class="k">set</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">SetPropertyAndNotifyOnCompletion</span><span class="p">(</span><span class="k">ref</span><span class="w"> </span><span class="n">_saveTask</span><span class="p">,</span><span class="w"> </span><span class="k">value</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Save</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">SaveTask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DoSaveAsync</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="nf">DoSaveAsync</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="n">Task</span><span class="p">.</span><span class="n">Delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_3">任务完成回调</h2>
+<p><code>SetPropertyAndNotifyOnCompletion</code> 还提供了支持回调函数（<code>Action&lt;Task&gt;</code> 或 <code>Action&lt;Task&lt;T&gt;&gt;</code>）的重载版本。当任务完成触发属性通知后，会自动执行指定的回调：</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyViewModel</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ObservableObject</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">TaskNotifier</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;?</span><span class="w"> </span><span class="n">_loadDataTask</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;?</span><span class="w"> </span><span class="n">LoadDataTask</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">get</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">_loadDataTask</span><span class="p">;</span>
+<span class="w">        </span><span class="k">set</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">SetPropertyAndNotifyOnCompletion</span><span class="p">(</span><span class="k">ref</span><span class="w"> </span><span class="n">_loadDataTask</span><span class="p">,</span><span class="w"> </span><span class="k">value</span><span class="p">,</span><span class="w"> </span><span class="n">task</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">task</span><span class="p">.</span><span class="n">IsCompletedSuccessfully</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// 任务成功完成后的处理逻辑</span>
+<span class="w">                </span><span class="n">Debug</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$"加载完成: {task.Result}"</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">else</span><span class="w"> </span><span class="nf">if</span><span class="w"> </span><span class="p">(</span><span class="n">task</span><span class="p">.</span><span class="n">IsFaulted</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// 处理异常</span>
+<span class="w">                </span><span class="n">Debug</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$"加载失败: {task.Exception?.Message}"</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="xaml">XAML 界面绑定</h2>
+<p>因为公开属性是标准的 <code>Task</code> / <code>Task&lt;T&gt;</code> 实例，因此可以直接在 XAML 中绑定 <code>Task</code> 类的原生属性：</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;StackPanel&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!-- 绑定任务执行结果（完成前为 null/默认值，完成后自动刷新显示） --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;TextBlock</span><span class="w"> </span><span class="na">Text=</span><span class="s">"{Binding LoadDataTask.Result}"</span><span class="w"> </span><span class="nt">/&gt;</span>
+
+<span class="w">    </span><span class="cm">&lt;!-- 绑定任务是否已完成（可配合转换器控制加载指示器的显示/隐藏） --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;ProgressBar</span><span class="w"> </span><span class="na">IsIndeterminate=</span><span class="s">"True"</span>
+<span class="w">                 </span><span class="na">Visibility=</span><span class="s">"{Binding LoadDataTask.IsCompleted, Converter={StaticResource BooleanToInverseVisibilityConverter}}"</span><span class="w"> </span><span class="nt">/&gt;</span>
+
+<span class="w">    </span><span class="cm">&lt;!-- 绑定任务抛出的异常信息 --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;TextBlock</span><span class="w"> </span><span class="na">Text=</span><span class="s">"{Binding LoadDataTask.Exception.InnerException.Message}"</span>
+<span class="w">               </span><span class="na">Foreground=</span><span class="s">"Red"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/StackPanel&gt;</span>
+</code></pre></div>
+<h2 id="asyncrelaycommand">与 AsyncRelayCommand 的对比与选型</h2>
+<p>如果你的需求主要是<strong>响应用户操作触发异步任务</strong>，并且想要<strong>获取任务是否正在运行</strong>（例如在界面上展示 Loading 加载状态或防止按钮被重复点击），还可以考虑使用 <a href="../../../RelayCommand/AsyncRelayCommand/">AsyncRelayCommand</a>（或源生成器的 <code>[RelayCommand]</code> 特性）：</p>
+<ul>
+<li><strong><code>AsyncRelayCommand</code></strong>：自带 <code>IsRunning</code> 属性与任务取消支持，执行期间会自动禁用绑定的按钮（防止重复触发），配合源生成器无需手写样板代码。</li>
+<li><strong><code>TaskNotifier</code></strong>：适用于<strong>数据驱动</strong>的场景，主要用于需要在 ViewModel 中直接将 <code>Task</code> / <code>Task&lt;T&gt;</code> 作为属性公开给 UI 绑定并监听其完成状态（例如直接在 XAML 中绑定 <code>Task.Result</code> 或捕获任务异常）。</li>
+</ul>
+<h2 id="avalonia-ui">在 Avalonia UI 中的使用差异</h2>
+<p>Avalonia 与 WPF 存在一些区别，导致它不需要也不建议使用 <code>TaskNotifier</code>**：</p>
+<ol>
+<li><strong>通知机制差异</strong>：Avalonia 的数据绑定底层机制与 WPF 不同。<code>TaskNotifier</code> 在任务完成后，针对同一个 <code>Task</code> 实例再次触发 <code>PropertyChanged</code> 事件，无法促使 Avalonia 的绑定系统正确重新读取并刷新属性值。</li>
+<li><strong>UI 阻塞风险</strong>：在 Avalonia（尤其是启用编译绑定时）直接在 XAML 中通过 <code>Task.Result</code> 访问未完成的任务，可能会导致 UI 线程阻塞。</li>
+</ol>
+<h3 id="avalonia">Avalonia 推荐方案：<code>^</code> 流绑定运算符</h3>
+<p>Avalonia 框架本身原生内置了<strong>异步流式绑定运算符 <code>^</code></strong>（Stream Binding）。当绑定到 <code>Task</code> 或 <code>Task&lt;T&gt;</code> 类型的属性时，只需在属性名后追加 <code>^</code>，Avalonia 就会自动异步等待任务完成并更新界面，期间还可以通过 <code>FallbackValue</code> 指定加载阶段的占位内容。</p>
+<p>因此，在 Avalonia 中直接使用普通属性即可：</p>
+<p><strong>ViewModel 代码：</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyViewModel</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ObservableObject</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// 在 Avalonia 中直接使用普通的 Task&lt;T&gt; 属性，无需 TaskNotifier</span>
+<span class="w">    </span><span class="na">[ObservableProperty]</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;?</span><span class="w"> </span><span class="n">_loadDataTask</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">LoadData</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LoadDataTask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FetchDataAsync</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">FetchDataAsync</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="n">Task</span><span class="p">.</span><span class="n">Delay</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">"数据加载成功！"</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Avalonia AXAML 绑定：</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;StackPanel&gt;</span>
+<span class="w">    </span><span class="nt">&lt;TextBlock</span><span class="w"> </span><span class="na">Text=</span><span class="s">"{Binding LoadDataTask^, FallbackValue='数据加载中...'}"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/StackPanel&gt;</span>
+</code></pre></div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+  <h2 id="__comments">评论</h2>
+  <!-- Insert generated snippet here -->
+  <script src="https://giscus.app/client.js"
+  data-repo="BYJRK/CommunityToolkit.Mvvm_ZeroToHero"
+  data-repo-id="R_kgDOLAm24w"
+  data-category="Announcements"
+  data-category-id="DIC_kwDOLAm2484CeuOw"
+  data-mapping="pathname"
+  data-strict="1"
+  data-reactions-enabled="1"
+  data-emit-metadata="0"
+  data-input-position="top"
+  data-theme="preferred_color_scheme"
+  data-lang="zh-CN"
+  data-loading="lazy"
+  crossorigin="anonymous"
+  async>
+</script>
+  <!-- Synchronize Giscus theme with palette -->
+  <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    // Set palette on initial load
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+      var theme = palette.color.scheme === "slate"
+        ? "transparent_dark"
+        : "light"
+
+      // Instruct Giscus to set theme
+      giscus.setAttribute("data-theme", theme) 
+    }
+
+    // Register event handlers after documented loaded
+    document.addEventListener("DOMContentLoaded", function() {
+      var ref = document.querySelector("[data-md-component=palette]")
+      ref.addEventListener("change", function() {
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+          var theme = palette.color.scheme === "slate"
+            ? "transparent_dark"
+            : "light"
+
+          // Instruct Giscus to change theme
+          var frame = document.querySelector(".giscus-frame")
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            "https://giscus.app"
+          )
+        }
+      })
+    })
+  </script>
+  <!-- Cloudflare Web Analytics -->
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' 
+          data-cf-beacon='{"token": "05a4a14089274f78a44d8374d97b63c9"}'>
+  </script>
+  <!-- End Cloudflare Web Analytics -->
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../SetProperty/" class="md-footer__link md-footer__link--prev" aria-label="上一页: SetProperty">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                SetProperty
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../ObservableRecipient/" class="md-footer__link md-footer__link--next" aria-label="下一页: ObservableRecipient">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                ObservableRecipient
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.indexes", "navigation.instant", "navigation.instant.progress", "navigation.sections", "search.suggest", "navigation.footer", "content.tooltips", "content.tabs.link", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
