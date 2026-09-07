@@ -136,3 +136,46 @@ public class MyViewModel : ObservableObject
 
 - **`AsyncRelayCommand`**：自带 `IsRunning` 属性与任务取消支持，执行期间会自动禁用绑定的按钮（防止重复触发），配合源生成器无需手写样板代码。
 - **`TaskNotifier`**：适用于**数据驱动**的场景，主要用于需要在 ViewModel 中直接将 `Task` / `Task<T>` 作为属性公开给 UI 绑定并监听其完成状态（例如直接在 XAML 中绑定 `Task.Result` 或捕获任务异常）。
+
+## 在 Avalonia UI 中的使用差异
+
+Avalonia 与 WPF 存在一些区别，导致它不需要也不建议使用 `TaskNotifier`**：
+
+1. **通知机制差异**：Avalonia 的数据绑定底层机制与 WPF 不同。`TaskNotifier` 在任务完成后，针对同一个 `Task` 实例再次触发 `PropertyChanged` 事件，无法促使 Avalonia 的绑定系统正确重新读取并刷新属性值。
+2. **UI 阻塞风险**：在 Avalonia（尤其是启用编译绑定时）直接在 XAML 中通过 `Task.Result` 访问未完成的任务，可能会导致 UI 线程阻塞。
+
+### Avalonia 推荐方案：`^` 流绑定运算符
+
+Avalonia 框架本身原生内置了**异步流式绑定运算符 `^`**（Stream Binding）。当绑定到 `Task` 或 `Task<T>` 类型的属性时，只需在属性名后追加 `^`，Avalonia 就会自动异步等待任务完成并更新界面，期间还可以通过 `FallbackValue` 指定加载阶段的占位内容。
+
+因此，在 Avalonia 中直接使用普通属性即可：
+
+**ViewModel 代码：**
+
+```csharp
+public partial class MyViewModel : ObservableObject
+{
+    // 在 Avalonia 中直接使用普通的 Task<T> 属性，无需 TaskNotifier
+    [ObservableProperty]
+    private Task<string>? _loadDataTask;
+
+    public void LoadData()
+    {
+        LoadDataTask = FetchDataAsync();
+    }
+
+    private async Task<string> FetchDataAsync()
+    {
+        await Task.Delay(2000);
+        return "数据加载成功！";
+    }
+}
+```
+
+**Avalonia AXAML 绑定：**
+
+```xml
+<StackPanel>
+    <TextBlock Text="{Binding LoadDataTask^, FallbackValue='数据加载中...'}" />
+</StackPanel>
+```
